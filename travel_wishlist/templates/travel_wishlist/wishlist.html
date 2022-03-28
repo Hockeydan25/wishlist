@@ -1,0 +1,29 @@
+<h2>Travel Wishlist</h2>
+
+<form method="POST" action="{% url 'place_list' %}">  
+    {% csrf_token %}
+    {{ new_place_form }}
+    <button type="submit">Add</button>
+</form>
+
+<!-- django template tag, for loop -->
+{% for place in places %} 
+
+<div>
+    {{ place.name }} <!-- watch spacing with brackets too much and you just get place.name -->
+      
+    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+        {% csrf_token %}
+        <button>Visited</button>
+    </form>
+        
+</div>
+<!-- used as an easy validation if ther isn't any paragraph will display.  -->
+{% empty %}
+
+<p>You have no places in your wish list</p>
+
+<!-- ends for loop -->
+{% endfor %}
+
+<a href="{% url 'places_visited' %}">Places you've visited</a> <!--anchor tag url link to places visited html-->
