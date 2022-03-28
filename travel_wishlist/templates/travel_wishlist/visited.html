@@ -1,3 +1,6 @@
+{% extends 'travel_wishlist/base.html' %} <!--tells the wishlist to look for base template and put here -->
+{% block content %}
+
 <h2>Places you have visited</h2>
 
     {% if visited %}
@@ -16,4 +19,4 @@
 
     {% endif %}
 
-    <a href="{% url 'place_list' %}">Your wishlist</a> <!--anchor for urlwatch the quotes single double-->
+{% endblock %}   
