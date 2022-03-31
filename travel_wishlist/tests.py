@@ -48,3 +48,42 @@ class VisitedList(TestCase):
         self.assertNotContains(response, 'Tokyo')  #checks these are not in the list
         self.assertNotContains(response, 'New York')
 
+class TestAddNewPLace(TestCase):
+
+    def test_add_new_unvisited_place(self):
+        add_place_url = reverse('place_list')
+        new_place_data = { 'name':'Tokyo', 'visited': False }
+
+        response = self.client.post(add_place_url, new_place_data, follow=True)  # new place follow is new.
+        
+        self.assertTemplateUsed(response, 'travel_wishlist/wishlist.html')
+        
+        response_places = response.context['places']
+        self.assertEqual(1, len(response_places))
+        tokyo_from_response = response_places[0]
+
+        tokyo_from_database = Place.objects.get(name='Tokyo', visited=False)
+
+        self.assertEqual(tokyo_from_database, tokyo_from_response)
+
+
+class TestVisitedPlace(TestCase):
+
+    fixtures = ['test_places']  # data we are testing/checking 
+
+    def test_visit_place(self):
+        visit_place_url = reverse('place_was_visited', args=(2, ))  # pk is NewYork, setting this so we can test it is there
+        response = self.client.post(visit_place_url, follow=True)
+
+        self.assertTemplateUsed(response, 'travel_wishlist/wishlist.html')
+
+        self.assertNotContains(response, 'New York')
+        self.assertContains(response, 'Tokyo')
+
+        new_york = Place.objects.get(pk=2)
+        self.assertTrue(new_york.visited)
+
+    def test_non_place(self):
+        visit_nonexist_place_url = reverse('place_was_visited',  args=(123456, ))
+        response = self.client.post(visit_nonexist_place_url, follow=True)
+        self.assertEqual(404, response.status_code)
