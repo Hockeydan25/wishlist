@@ -1,21 +1,28 @@
+{% load static %}
+
 <!DOCTYPE html-->
 <html>
     <head>  <!--  -->
         <title>Travel WishList</title>
+        <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     </head>
+
     <h1>Where do you want to go?</h1>
 
     <body>
         {% block content %}
         {% endblock %}
         
-    </body>
+    
+
     <div>
         <p>A travel wishlist, built with Django</p> 
 
-        <a href="{% url 'place_list' %}">Your wishlist</a> <!--anchor for urlwatch the quotes single double-->
-        <a href="{% url 'places_visited' %}">Places you've visited</a> <!--anchor tag url link to places visited html-->
+        <a class="nav-link" href="{% url 'place_list' %}">Your wishlist</a> <!--anchor for urlwatch the quotes single double-->
+        <a class="nav-link" href="{% url 'places_visited' %}">Places you've visited</a> <!--anchor tag url link to places visited html-->
     </div>
 
 
+    </body>
 </html>
