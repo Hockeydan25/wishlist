@@ -2,13 +2,20 @@ from selenium.webdriver.chrome import WebDriver
 
 from django.test import LiveServerTestCase
 
+from .models import Place
+
+"""
+functional testing much slower more realistic, can do things unit testing doesn't like loading page and 
+inputting data and clicking buttons checking object positoning and is on the page.
+"""
+
 class TitleTest(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.selenium = WebDriver()
-        cls.selenium.implicitly_wait(10)
+        cls.selenium = WebDriver()    # funtion should call to launch chrome manger.
+        cls.selenium.implicitly_wait(10)  # waits 10 seconds for loading of page.
 
     @classmethod
     def tearDownClass(cls):
@@ -29,7 +36,7 @@ class AddPlacesTest(LiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.selenium = WebDriver()
-        cls.selenium.implicitly_wait(10)  # waits 10 seconds for loading of page giving a 
+        cls.selenium.implicitly_wait(10)  # waits 10 seconds for loading of page.
 
     @classmethod
     def tearDownClass(cls):

@@ -3,7 +3,11 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import Place
-# Create your tests here. reverse extention of python testcase 
+
+"""
+Create unit tests here. reverse extention of python testcase. unit test intergrations,
+are faster and less realistic, checking only server code not what user is interacting with/seeing.
+""" 
 
 class TestHomePage(TestCase):
 
@@ -48,7 +52,7 @@ class VisitedList(TestCase):
         self.assertNotContains(response, 'Tokyo')  #checks these are not in the list
         self.assertNotContains(response, 'New York')
 
-class TestAddNewPLace(TestCase):
+class TestAddNewPlace(TestCase):
 
     def test_add_new_unvisited_place(self):
         add_place_url = reverse('place_list')
@@ -58,9 +62,9 @@ class TestAddNewPLace(TestCase):
         
         self.assertTemplateUsed(response, 'travel_wishlist/wishlist.html')
         
-        response_places = response.context['places']
+        response_places = response.context['places']  
         self.assertEqual(1, len(response_places))
-        tokyo_from_response = response_places[0]
+        tokyo_from_response = response_places[0]  # index postion 
 
         tokyo_from_database = Place.objects.get(name='Tokyo', visited=False)
 
