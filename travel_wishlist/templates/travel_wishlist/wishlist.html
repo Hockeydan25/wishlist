@@ -12,11 +12,11 @@
 {% for place in places %} 
 
 <div class="wishlist-place">
-    <span class="place-name">{{ place.name }}</span><!-- watch spacing with brackets too much and you just get place.name -->
+    <span id="place-name-{{ place.pk }}" class="place-name">{{ place.name }}</span><!-- watch spacing with brackets too much and you just get place.name -->
       
     <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
         {% csrf_token %}
-        <button>Visited</button>
+        <button id="visited-button-{{ place.pk }}">Visited</button>
     </form>
         
 </div>
