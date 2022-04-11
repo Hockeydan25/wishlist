@@ -22,9 +22,9 @@ class TitleTest(LiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_title_on_home_page(self):
+    def test_title_shown_on_home_page(self):
         self.selenium.get(self.live_server_url)
-        self.assertIn('Travel Wishlist', self.selenium.title)    
+        self.assertIn( self.selenium.title, 'Travel Wishlist')    
 
 
 class AddPlacesTest(LiveServerTestCase):
