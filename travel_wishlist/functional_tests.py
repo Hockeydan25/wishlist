@@ -29,7 +29,7 @@ class TitleTest(LiveServerTestCase):
 
     def test_title_shown_on_home_page(self):
         self.selenium.get(self.live_server_url)
-        self.assertIn( 'Travel Wishlist', self.selenium.title)    
+        self.assertIn('Travel Wishlist', self.selenium.title)    
 
 
 class AddPlacesTest(LiveServerTestCase):

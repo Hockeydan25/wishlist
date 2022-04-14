@@ -16,7 +16,7 @@ class Place(models.Model):
 
 
     def save(self, *args, **kwargs):
-        old_place = Place.objects.filter(pk=self.pk).first  # database query, if there is a new place
+        old_place = Place.objects.filter(pk=self.pk).first()  # database query, if there is a new place
         if old_place and old_place.photo:
             if old_place.photo != self.photo:  # checking old phot validate not there or delete
                 self.delete_photo(old_place.photo)
@@ -25,7 +25,7 @@ class Place(models.Model):
 
 
     def delete_photo(self, photo):
-        if default_storage.exist(photo.name):
+        if default_storage.exists(photo.name):
             default_storage.delete(photo.name)
 
 

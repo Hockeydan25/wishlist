@@ -33,7 +33,7 @@ def place_list(request):
 
 @login_required
 def places_visited(request):
-    visited = Place.objects.filter(visited=True).filter(visited=False).order_by('name')
+    visited = Place.objects.filter(user=request.user).filter(visited=True).order_by('name')
     return render(request, 'travel_wishlist/visited.html', {'visited': visited} )
 
 
@@ -73,11 +73,11 @@ def place_details(request, place_pk):
         # if GET request, show Place info and form.
         #
     else:
-        if place.visted:  # make new review form
+        if place.visited:  # make new review form
             review_form = TripReviewForm(instance=place)  # pre-populate with data from this Place instance.
-            return render(request, 'travel_wishlist/place_detail.html', {'place': place, 'review_form': review_form} )
+            return render(request, 'travel_wishlist/place_details.html', {'place': place, 'review_form': review_form} )
         else:
-            return render(request, 'travel_wishlist/place_detail.html', {'place': place} )
+            return render(request, 'travel_wishlist/place_details.html', {'place': place} )
 
 
 @login_required
