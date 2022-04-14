@@ -27,8 +27,8 @@ def place_list(request):
     # If not a POST request, or the form is not valid, display the page.
     # with the form, and place list.
     places = Place.objects.filter(user=request.user).filter(visited=False).order_by('name')
-    form = NewPlaceForm()  # used to creat HTML (new_place_form)
-    return render(request, 'travel_wishlist/wishlist.html', {'places': places, 'new_place_form': form})  #dict data type.
+    new_place_form = NewPlaceForm()  # used to creat HTML (new_place_form)
+    return render(request, 'travel_wishlist/wishlist.html', {'places': places, 'new_place_form': new_place_form})  #dict data type.
 
 
 @login_required
