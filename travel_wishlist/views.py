@@ -55,8 +55,8 @@ def place_details(request, place_pk):
 def delete_place(request, place_pk):
     place =get_object_or_404(Place, pk=place_pk)
     if place.user == request.user:
-        place.delete()
-        return redirect('place_list')
+        place.delete()  
+        return redirect('place_list')  # updating and returning to redirect to request to the home page, place_list.
     else:
         return HttpResponseForbidden()    
 
