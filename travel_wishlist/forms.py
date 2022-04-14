@@ -16,7 +16,7 @@ class DateInput(forms.DateInput):
 class TripReviewForm(forms.ModelForm):  # information about the object and it belongs to Place.
     class Meta:
         model = Place
-        fields = ('note', 'date_visited', 'photo')
+        fields = ('notes', 'date_visited', 'photo')
         Widgets = {
             'date_visited': DateInput()
         }
