@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+#from django.conf.urls import url
 from .models import Place
-from .forms import NewPlaceForm
+from .forms import NewPlaceForm, TripReviewForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponseForbidden  # checks only preson logged in can make change.
+
 
 @login_required
 def place_list(request):
@@ -21,15 +24,18 @@ def place_list(request):
             place.save()    # saves place to db.
             return redirect('place_list')  # reloads home page.
 
+    # If not a POST request, or the form is not valid, display the page.
+    # with the form, and place list.
     places = Place.objects.filter(user=request.user).filter(visited=False).order_by('name')
-    new_place_form = NewPlaceForm()  # used to creat HTML 
-    return render(request, 'travel_wishlist/wishlist.html', {'places': places, 'new_place_form': new_place_form})  #dict data type.
+    form = NewPlaceForm()  # used to creat HTML (new_place_form)
+    return render(request, 'travel_wishlist/wishlist.html', {'places': places, 'new_place_form': form})  #dict data type.
 
 
 @login_required
 def places_visited(request):
     visited = Place.objects.filter(visited=True)
     return render(request, 'travel_wishlist/visited.html', {'visited': visited} )
+
 
 @login_required
 def place_was_visited(request, place_pk):
@@ -47,7 +53,31 @@ def place_was_visited(request, place_pk):
 @login_required
 def place_details(request, place_pk):
     place =get_object_or_404(Place, pk=place_pk)
-    return render(request, 'travel_wishlist/place_details.html', {'place': place})
+    
+    # does this place belong to the current user?
+    if place.user != request.user:
+        return HttpResponseForbidden() 
+     
+    # is this a Get request (show data+ form), or a POST request (update Place object)?
+
+   # if POST request, validate the form data and update.
+    if request.method == 'POST':
+       form = TripReviewForm(request.POST, request.FILES, instance=place)
+       if form.is_valid():
+           form.save()
+           messages.info(request, 'Trip information updated!')
+       else:
+            messages.error(request, form.errors)  # refine later
+
+       return redirect('place_details', place_pk=place_pk)
+        # if GET request, show Place info and form.
+        #
+    else:
+        if place.visted:  # make new review form
+            review_form = TripReviewForm(instance=place)  # pre-populate with data from this Place instance.
+            return render(request, 'travel_wishlist/place_detail.html', {'place': place, 'review_form': review_form})
+        else:
+            return render(request, 'travel_wishlist/place_detail.html', {'place': place})
 
 
 @login_required

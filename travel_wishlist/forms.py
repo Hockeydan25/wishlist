@@ -8,8 +8,8 @@ class NewPlaceForm(forms.ModelForm):
         model = Place
         fields = ('name', 'visited')
 
-
-class DateInput(forms.DateInput):  # usues django input format
+# usues django input format instead of just a 'text' look, custom date input fields.
+class DateInput(forms.DateInput):  
     input_type = 'date'
 
      
