@@ -114,7 +114,7 @@ class PageContentTests(LiveServerTestCase):
     fixtures = ['test_users', 'test_places']
 
     def setUp(self):
-        self.browser = WebDriver  
+        self.browser = WebDriver()  
         self.browser.implicitly_wait(3)
         
         self.browser.get(self.live_server_url + '/admin')   # expect to be redirected to login page 
