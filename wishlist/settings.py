@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bvth@i%mh#6+wk!cg#-$6*w67=_bm%olq!#9rj^7z)+s=h9v$!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'wishlist.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgressql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'places',
         'USER': 'explorer',
         'PASSWORD': os.getenv('EXPLORER_PW'),

@@ -4,4 +4,6 @@ __pycache__
 .idea
 db.sqlite3
 .jpg
-cloud_sql_proxy_x64.exe
+cloud_sql_proxy.exe
+travel_credentials.json
+
