@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-#from django.conf.urls import url
+from django.conf.urls import url
 from .models import Place
 from .forms import NewPlaceForm, TripReviewForm
 from django.contrib.auth.decorators import login_required

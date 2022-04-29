@@ -3,7 +3,7 @@ entrypoint: gunicorn -b :$PORT wishlist.wsgi
 
 handlers:
 - url: /static
-  static_dir: www/static
+  static_dir: www/static/
 
 - url: /.*
   script: auto
