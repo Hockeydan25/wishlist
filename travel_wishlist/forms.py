@@ -1,4 +1,3 @@
-from tkinter import Widget
 from django import forms
 from .models import Place
 from django.forms import FileInput, DateInput
