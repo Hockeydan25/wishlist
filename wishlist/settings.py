@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-bvth@i%mh#6+wk!cg#-$6*w67=_bm%olq!#9rj^7z)+s=h9v$!
 # SECURITY WARNING: don't run with debug turned on in production!
 #set to be false if running on GAE.
 if os.getenv('GAE_INSTANCE'):
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
