@@ -26,10 +26,9 @@ SECRET_KEY = 'django-insecure-bvth@i%mh#6+wk!cg#-$6*w67=_bm%olq!#9rj^7z)+s=h9v$!
 # SECURITY WARNING: don't run with debug turned on in production!
 #set to be false if running on GAE.
 if os.getenv('GAE_INSTANCE'):
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -160,7 +159,7 @@ if os.getenv('GAE_INSTANCE'):
 
     STATIC_URL = f'https://storage.cloud.google.com/{GS_STATIC_FILE_BUCKET}/static/'
 
-    DEFAULT_FILE_STORAGE = 'storage.backends.gcloud.GoogleCloudStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = 'wishlist-place-images'  # my bucket name.
     MEDIA_URL = f'https://storage.cloud.google.com/{GS_BUCKET_NAME}/media/'
 
