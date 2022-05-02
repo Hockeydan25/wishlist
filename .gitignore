@@ -3,7 +3,9 @@ __pycache__
 .vscode
 .idea
 db.sqlite3
-.jpg
+*.jpg
 cloud_sql_proxy.exe
-travel_credentials.json
-
+explorer_credentials.json
+app.yaml
+venv
+env
